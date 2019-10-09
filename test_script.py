@@ -13,6 +13,7 @@ from ev3dev2.button import Button
 btn = Button()
 
 # lets keep this on top of the file for easy editing
+# THIS IS A CONTRIBUTION
 def main():
     '''The main function of our program'''
 
