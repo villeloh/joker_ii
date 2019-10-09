@@ -91,6 +91,7 @@ LOW_BATTERY_VOLTAGE_THRESHOLD = 5.0
 MIDDLE_VOLTAGE_THRESHOLD = 7.0
 
 soundList = [
+    'Trust me, I am an Engineer'
     'Three point six rontgen. Not great, not terrible.',
     'Take him to the infirmary, he\'s delusional',
     'He\'s in shock, get him out of here!',
