@@ -25,12 +25,6 @@ def main():
         on_button_press()
         time.sleep(0.01)
 
-    # print something to the screen of the device
-    # the name of our robot, after the Joker robot that did cleanup in
-    # Chernobyl irl
-    print('JOKER II')
-    print('15,000 ROENTGEN')
-
     # print something to the output panel in VS Code
     # debug_print('Hello VS Code!')
 
