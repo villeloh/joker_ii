@@ -39,10 +39,11 @@ def top_left_channel_1_action(state):
     if state:
         straight_ahead(50, 1)
         turn(LEFT, 90)
-        straight_ahead(50, 4)
-        turn(RIGHT, 90)
-        straight_ahead(50, 6)
-        turn(RIGHT, 90)
+        straight_ahead(50, 3.7)
+        turn(RIGHT, 75)
+        straight_ahead(50, 1.2)
+        turn(RIGHT, 85)
+        straight_ahead(50, 3.0)
 
 def straight_ahead(speed, seconds):
     mt.on_for_seconds(speed, speed, seconds)

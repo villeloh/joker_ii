@@ -45,10 +45,10 @@ def sweeping_turn(direction):
 
 def top_left_channel_1_action(state):
     if state:
-        straight_ahead(90, 1)
-        sweeping_turn(RIGHT)
-        straight_ahead(90, 1)
+        straight_ahead(90, 2)
         sweeping_turn(LEFT)
+        straight_ahead(90, 2)
+        sweeping_turn(RIGHT)
         # continue to the other gate
 
 def straight_ahead(speed, seconds):

@@ -11,8 +11,43 @@ from ev3dev2.power import PowerSupply
 from ev3dev2.button import Button
 from ev3dev2.motor import OUTPUT_A, OUTPUT_D, MoveTank
 from ev3dev2.motor import SpeedDPS, SpeedRPM, SpeedRPS, SpeedDPM
-from ev3dev2.sensor import INPUT_1
+from ev3dev2.sensor import INPUT_1, INPUT_2
 from ev3dev2.sensor.lego import ColorSensor, InfraredSensor
+
+mt = MoveTank(OUTPUT_A, OUTPUT_D)
+irs = InfraredSensor(INPUT_2)
+
+######## MANUAL CONTROLS (copy-paste it in main()) ##################################################
+
+manual_controls = True
+
+if manual_controls:
+    irs.on_channel1_top_left = turn_left
+    irs.on_channel1_top_right = turn_right
+    irs.on_channel1_bottom_left = reverse
+    irs.on_channel1_beacon = straight_forward
+
+def turn_left(state):
+    while state:
+        mt.on(-50, 90)
+    mt.off()
+
+def turn_right(state):
+    while state:
+        mt.on(90, -50)
+    mt.off()
+
+def reverse(state):
+    while state:
+        mt.on(-80, -80)
+    mt.off()
+
+def straight_forward(state):
+    while state:
+        mt.on(80, 80)
+    mt.off()
+
+#######################################################################################
 
 def turn(direction, degrees):
 
@@ -45,6 +80,12 @@ def turn_2(direction, degrees):
     mt.on_for_seconds(left_speed, right_speed, degrees / 85)
 
 btn = Button()
+
+def engage_manual_control():
+    while True:
+        irs.process()
+        time.sleep(0.01)
+
 
 # lets keep this on top of the file for easy editing
 def main():
