@@ -38,12 +38,30 @@ def main():
 
 def top_left_channel_1_action(state):
     if state:
-        # straight_ahead(50, 1)
-        # turn_2(LEFT, 360)
-        turn_2(RIGHT, 360)
+        straight_ahead(50, 1)
+        turn(LEFT, 90)
+        straight_ahead(50, 4)
+        turn(RIGHT, 90)
+        straight_ahead(50, 6)
+        turn(RIGHT, 90)
 
 def straight_ahead(speed, seconds):
     mt.on_for_seconds(speed, speed, seconds)
+
+def turn_unfinished_do_not_use(direction, degrees):
+
+    left_speed = 0
+    right_speed = 0
+    speed = 50
+
+    if direction == LEFT:
+        left_speed = -speed
+        right_speed = speed
+    elif direction == RIGHT:
+        left_speed = speed
+        right_speed = 0
+
+    mt.on_for_degrees(left_speed, right_speed, degrees * 4)
 
 def turn(direction, degrees):
 
@@ -58,22 +76,7 @@ def turn(direction, degrees):
         left_speed = speed
         right_speed = -speed
 
-    mt.on_for_degrees(left_speed, right_speed, degrees * 4)
-
-def turn_2(direction, degrees):
-
-    left_speed = 0
-    right_speed = 0
-    speed = 50
-
-    if direction == LEFT:
-        left_speed = -speed
-        right_speed = speed
-    elif direction == RIGHT:
-        left_speed = speed
-        right_speed = -speed
-
-    mt.on_for_seconds(left_speed, right_speed, degrees / 85)
+    mt.on_for_seconds(left_speed, right_speed, degrees / 103)
 
 def setup_brick_console():
     '''Make the device console (screen) more legible'''
@@ -92,14 +95,10 @@ def battery_check():
         Sound().speak('Battery at midway point.')
     print(voltage)
 
-def play_beep(hz=300.0, length=1.0):
+def play_beep(hz=300.0, length=3.0):
     Sound().play_tone(hz, length)
 
 # XXXXXXXXXXXXXXXXXXX STATIC CONSTANTS ETC XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-# state constants
-ON = True
-OFF = False
 
 # supposedly, the battery runs out very quickly after 5 volts
 LOW_BATTERY_VOLTAGE_THRESHOLD = 5.0
