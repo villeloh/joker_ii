@@ -16,7 +16,7 @@ from ev3dev2.power import PowerSupply
 from ev3dev2.button import Button
 from ev3dev2.motor import OUTPUT_A, OUTPUT_D, OUTPUT_B, MediumMotor, MoveTank
 from ev3dev2.motor import SpeedDPS, SpeedRPM, SpeedRPS, SpeedDPM
-from ev3dev2.sensor import INPUT_1, INPUT_2
+from ev3dev2.sensor import INPUT_3, INPUT_2
 from ev3dev2.sensor.lego import ColorSensor, InfraredSensor
 
 btn = Button()
@@ -25,7 +25,7 @@ mt = MoveTank(OUTPUT_D, OUTPUT_A)
 
 mm = MediumMotor(OUTPUT_B)
 
-cs = ColorSensor(INPUT_1)
+cs = ColorSensor(INPUT_3)
 
 irs = InfraredSensor(INPUT_2)
 
@@ -52,12 +52,7 @@ def run_script():
     while cs.color_name != 'White':
         mt.on_for_seconds(50, 50, 0.3, block = False)
     
-    for i in range(100):
-        play_beep(length=0.1)
-        mt.follow_line(kp=11.3, ki=0.05, kd=3.2,
-                       speed=SpeedPercent(30),
-                       follow_for=follow_for_ms, ms=100)
-    
+    follow_line(mt, speed, color, cs)
     
     n=0
     while True:
@@ -72,6 +67,13 @@ def run_script():
             # n = 1
         time.sleep(0.01)
     # return
+
+def follow_line(mt, speed, color, cs):
+    while True:
+        if cs.color_name == 'White':
+            mt.on_for_seconds(30, 30, 0.2, block = False)
+        else:
+            mt.on_for_seconds(-30, 30, 0.05, block = False)
 
 def top_left_channel_1_action(state):
     if state:
