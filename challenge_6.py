@@ -49,13 +49,13 @@ def main():
 
 def sweeping_turn(direction):
     if direction == LEFT:
-        mt.on_for_seconds(50, 70, 2, block=False)
+        mt.on_for_seconds(40, 80, 2, block=False)
     elif direction == RIGHT:
-        mt.on_for_seconds(70, 50, 2, block=False)
+        mt.on_for_seconds(80, 40, 2, block=False)
 
 def run_fight_logic():
     while True:
-        if (random.choice([True, False]) == True):
+        if (random.choice([LEFT, RIGHT]) == LEFT):
             sweeping_turn(LEFT)
         else:
             sweeping_turn(RIGHT)
