@@ -38,7 +38,6 @@ def main():
     irs.on_channel1_top_left = top_left_channel_1_action
     irs.on_channel1_top_right = top_right_channel_1_action
 
-
     while True:
         irs.process()
         time.sleep(0.01)
@@ -50,7 +49,16 @@ def main():
         run_script() '''
 
 def run_script():
-    # mt.on_for_seconds(90, 90, 8, block = False)
+    while cs.color_name != 'White':
+        mt.on_for_seconds(50, 50, 0.3, block = False)
+    
+    for i in range(100):
+        play_beep(length=0.1)
+        mt.follow_line(kp=11.3, ki=0.05, kd=3.2,
+                       speed=SpeedPercent(30),
+                       follow_for=follow_for_ms, ms=100)
+    
+    
     n=0
     while True:
         # print(cs.color_name)
