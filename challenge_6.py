@@ -47,9 +47,9 @@ def main():
 
 def sweeping_turn(direction):
     if direction == LEFT:
-        mt.on_for_seconds(40, 80, 2, block=False)
+        mt.on_for_seconds(30, 90, 3, block=False)
     elif direction == RIGHT:
-        mt.on_for_seconds(80, 40, 2, block=False)
+        mt.on_for_seconds(90, 30, 3, block=False)
 
 def run_fight_logic():
     while True:
@@ -60,17 +60,17 @@ def run_fight_logic():
 
         # to prevent it from calling the sweeping_turn over
         # and over again (without blocking, which also disables the color sensor)
-        countDown = 300000
+        countDown = 300
         while (countDown > 0):
             countDown = countDown - 1
-            if (cs.color_name == 'NoColor'):
-                straight_reverse(70, 1)
-                return
+            if (cs.color_name == 'NoColor' or cs.color_name == 'Red'):
+                straight_reverse(70, 2)
+                countDown = -1
         time.sleep(0.01)
 
 def top_left_channel_1_action(state):
     if state:
-        straight_ahead(50, 1)
+        straight_ahead(70, 1.7)
         run_fight_logic()
 
 def straight_ahead(speed, seconds):
@@ -78,21 +78,6 @@ def straight_ahead(speed, seconds):
 
 def straight_reverse(speed, seconds):
     mt.on_for_seconds(-speed, -speed, seconds)
-
-def turn(direction, degrees):
-
-    left_speed = 0
-    right_speed = 0
-    speed = 50
-
-    if direction == LEFT:
-        left_speed = -speed
-        right_speed = speed
-    elif direction == RIGHT:
-        left_speed = speed
-        right_speed = -speed
-
-    mt.on_for_seconds(left_speed, right_speed, degrees / 103, block=False)
 
 def setup_brick_console():
     '''Make the device console (screen) more legible'''
