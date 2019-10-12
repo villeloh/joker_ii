@@ -9,7 +9,7 @@ import random
 from ev3dev2.sound import Sound
 from ev3dev2.power import PowerSupply
 from ev3dev2.button import Button
-from ev3dev2.motor import OUTPUT_A, OUTPUT_B, MoveTank
+from ev3dev2.motor import OUTPUT_A, OUTPUT_D, MoveTank
 from ev3dev2.motor import SpeedDPS, SpeedRPM, SpeedRPS, SpeedDPM
 from ev3dev2.sensor import INPUT_1
 from ev3dev2.sensor.lego import ColorSensor, InfraredSensor
@@ -23,9 +23,10 @@ def main():
     setup_brick_console()
     battery_check()
 
-    # mt = MoveTank(OUTPUT_A, OUTPUT_B) # control the two motors at once
+    mt = MoveTank(OUTPUT_D, OUTPUT_A) # control the two motors at once
     # drive motor in A port at 50 % max speed, motor in port B at 75% max speed for 10 seconds
-    # mt.on_for_seconds(50, 75, 10)
+    mt.on_for_seconds(-75, 0, 2)
+    # mt.follow_line
 
     # print color sensor input to the brick:
     # cs = ColorSensor(INPUT_1)
@@ -33,26 +34,26 @@ def main():
      #   print(cs.color_name)
      #  time.sleep(0.01)
 
-    irs = InfraredSensor(INPUT_1)
-
-    while True:
+    # irs = InfraredSensor(INPUT_1)
+'''
+    # while True:
         if irs.proximity < 40 * 1.4:
             print("less than 40!")
         else:
-            print("too far away!")
-
+            print("too far away!") '''
+'''
     # wait for left button press
     while True:
         btn.wait_for_bump('left', timeout_ms=300)
         # on_button_press()
-        time.sleep(0.01) # give the processor time to 'rest' between button checks
+        time.sleep(0.01) # give the processor time to 'rest' between button checks '''
 
     # print something to the output panel in VS Code
     # debug_print('Hello VS Code!')
 
     # wait a bit so you have time to look at the display before the program
     # exits
-    time.sleep(3)
+    # time.sleep(3)
 
 # XXXXXXXXXXXXXXXXXXX METHODS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
