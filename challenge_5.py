@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# NOTE: change to micropython for optimized performance (but no sounds)
+#!/usr/bin/env micropython
 
 '''5 TRI-CENTRIFUGE
 A line of massive centrifuges used to conduct material research before the

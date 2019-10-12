@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# NOTE: change to micropython for optimized performance (but no sounds)
+#!/usr/bin/env micropython
 
 '''3 THE MONOLITH
 A massive supercomputer that used to run the facility. Extract a data cube to

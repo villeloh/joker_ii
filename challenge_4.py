@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# NOTE: change to micropython for optimized performance (but no sounds)
+#!/usr/bin/env micropython
 
 '''4 THE ROOT
 A chamber of massive steel pillars holding up the Monolith computing grounds.

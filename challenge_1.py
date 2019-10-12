@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# NOTE: change to micropython for optimized performance (but no sounds)
+#!/usr/bin/env micropython
 
 '''1 THE CACHE
 Find your way through the maze-like server room holding all the information

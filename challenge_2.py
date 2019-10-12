@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# NOTE: change to micropython for optimized performance (but no sounds)
+#!/usr/bin/env micropython
 
 '''2 THE CALIBRATOR
 A machine used to calibrate various sensors used on Dvergar’s robots. Carrying

@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# NOTE: change to micropython for optimized performance (but no sounds)
+#!/usr/bin/env micropython
 
 '''6 THE TERMINAL
 The main maintenance terminal, last used in Monolith’s installation years ago.
@@ -46,7 +45,6 @@ def main():
         irs.process()
         time.sleep(0.01)
 
-
 def sweeping_turn(direction):
     if direction == LEFT:
         mt.on_for_seconds(40, 80, 2, block=False)
@@ -68,7 +66,7 @@ def run_fight_logic():
             if (cs.color_name == 'NoColor'):
                 straight_reverse(70, 1)
                 return
-        # time.sleep(0.01)
+        time.sleep(0.01)
 
 def top_left_channel_1_action(state):
     if state:
