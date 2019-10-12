@@ -53,7 +53,8 @@ def run_script():
         mt.on_for_seconds(50, 50, 0.3, block = False)
 
     play_beep(length=0.1)
-    mt.follow_line(kp=11.3, ki=0.05, kd=3.2, speed=SpeedPercent(30), follow_for='follow_for_ms', ms=1000)
+    follow_line(mt, 30, 'White')
+    # mt.follow_line(kp=11.3, ki=0.05, kd=3.2, speed=SpeedPercent(30), follow_for='follow_for_ms', ms=1000)
 
     while True:
         # print(cs.color_name)
@@ -66,6 +67,28 @@ def run_script():
             # play_beep()
             # n = 1
         time.sleep(0.01)
+
+def follow_line(mt, speed, color_name):
+    turning_right = True
+    right_angle = False
+    while True:
+        if cs.color_name == color_name:
+            mt.on_for_seconds(speed, speed, 0.2, block = False)
+        elif turning_right:
+            mt.on_for_seconds(-speed, speed, 0.1, block = False)
+            turning_right = False
+        else:
+            mt.on_for_seconds(speed, -speed, 0.1, block = False)
+            turning_right = True
+            right_angle = True
+        if right_angle:
+            mt.on_for_seconds(-speed, speed, 0.5, block = False)
+            right_angle = False
+            if cs.color_name == color_name:
+                 mt.on_for_seconds(speed, -speed, 0.5, block = False)
+
+
+
 
 def top_left_channel_1_action(state):
     if state:
