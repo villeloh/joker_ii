@@ -1,4 +1,4 @@
-#!/usr/bin/env micropython
+#!/usr/bin/env python3
 
 '''3 THE MONOLITH
 A massive supercomputer that used to run the facility. Extract a data cube to

@@ -1,4 +1,4 @@
-#!/usr/bin/env micropython
+#!/usr/bin/env python3
 
 '''1 THE CACHE
 Find your way through the maze-like server room holding all the information

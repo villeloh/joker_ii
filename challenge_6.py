@@ -1,4 +1,4 @@
-#!/usr/bin/env micropython
+#!/usr/bin/env python3
 
 '''6 THE TERMINAL
 The main maintenance terminal, last used in Monolith’s installation years ago.

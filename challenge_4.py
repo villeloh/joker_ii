@@ -1,4 +1,4 @@
-#!/usr/bin/env micropython
+#!/usr/bin/env python3
 
 '''4 THE ROOT
 A chamber of massive steel pillars holding up the Monolith computing grounds.
