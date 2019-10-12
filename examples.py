@@ -14,6 +14,36 @@ from ev3dev2.motor import SpeedDPS, SpeedRPM, SpeedRPS, SpeedDPM
 from ev3dev2.sensor import INPUT_1
 from ev3dev2.sensor.lego import ColorSensor, InfraredSensor
 
+def turn(direction, degrees):
+
+    left_speed = 0
+    right_speed = 0
+    speed = 50
+
+    if direction == LEFT:
+        left_speed = -speed
+        right_speed = speed
+    elif direction == RIGHT:
+        left_speed = speed
+        right_speed = -speed
+
+    mt.on_for_degrees(left_speed, right_speed, degrees * 4)
+
+def turn_2(direction, degrees):
+
+    left_speed = 0
+    right_speed = 0
+    speed = 50
+
+    if direction == LEFT:
+        left_speed = -speed
+        right_speed = speed
+    elif direction == RIGHT:
+        left_speed = speed
+        right_speed = -speed
+
+    mt.on_for_seconds(left_speed, right_speed, degrees / 85)
+
 btn = Button()
 
 # lets keep this on top of the file for easy editing

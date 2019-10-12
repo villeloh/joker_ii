@@ -87,9 +87,6 @@ def follow_line(mt, speed, color_name):
             if cs.color_name == color_name:
                  mt.on_for_seconds(speed, -speed, 0.5, block = False)
 
-
-
-
 def top_left_channel_1_action(state):
     if state:
         run_script()
