@@ -9,20 +9,64 @@ import random
 from ev3dev2.sound import Sound
 from ev3dev2.power import PowerSupply
 from ev3dev2.button import Button
+from ev3dev2.motor import OUTPUT_A, OUTPUT_D, OUTPUT_B, MoveTank, MediumMotor
+from ev3dev2.motor import SpeedDPS, SpeedRPM, SpeedRPS, SpeedDPM
+from ev3dev2.sensor import INPUT_1, INPUT_2
+from ev3dev2.sensor.lego import ColorSensor, InfraredSensor
 
 btn = Button()
+mt = MoveTank(OUTPUT_A, OUTPUT_D)
+irs = InfraredSensor(INPUT_2)
+mm = MediumMotor(OUTPUT_B)
+
+def turn_left(state):
+    if state:
+        mt.on(-50, 50)
+    else:
+        mt.off()
+
+def turn_right(state):
+    if state:
+        mt.on(50, -50)
+    else:
+        mt.off()
+
+def reverse(state):
+    if state:
+        mt.on(-80, -80)
+    else:
+        mt.off()
+
+def straight_forward(state):
+    if state:
+        mt.on(80, 80)
+    else:
+        mt.off()
+
+def knife_swipe(state):
+    if state:
+        mm.on(-90)
+    else:
+        mm.off()
+
+manual_controls = True
+
+if manual_controls:
+    irs.on_channel1_top_left = straight_forward
+    irs.on_channel1_top_right = turn_right
+    irs.on_channel1_bottom_left = reverse
+    irs.on_channel1_beacon = knife_swipe
+    irs.on_channel1_bottom_right = turn_left
 
 # lets keep this on top of the file for easy editing
 def main():
     '''The main function of our program'''
 
     setup_brick_console()
-
     battery_check()
 
     while True:
-        btn.wait_for_bump('left', timeout_ms=300)
-        on_button_press()
+        irs.process()
         time.sleep(0.01)
 
     # print something to the output panel in VS Code
@@ -30,7 +74,7 @@ def main():
 
     # wait a bit so you have time to look at the display before the program
     # exits
-    time.sleep(3)
+    # time.sleep(3)
 
 # XXXXXXXXXXXXXXXXXXX METHODS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
