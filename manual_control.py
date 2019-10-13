@@ -19,7 +19,23 @@ mt = MoveTank(OUTPUT_A, OUTPUT_D)
 irs = InfraredSensor(INPUT_2)
 mm = MediumMotor(OUTPUT_B)
 
-reverseScoop = False
+states = [0,0,0,0] # top left, top right, bottom left, bottom right
+
+def top_left_channel_1_action(state):
+    states[0]=state
+    resolve_action(state)
+
+def bottom_left_channel_1_action(state):
+    states[2]=state
+    resolve_action(state)
+
+def top_right_channel_1_action(state):
+    states[1]=state
+    resolve_action(state)
+
+def bottom_right_channel_1_action(state):
+    states[3]=state
+    resolve_action(state)
 
 def turn_left(state):
     if state:
@@ -45,24 +61,38 @@ def straight_forward(state):
     else:
         mt.off()
 
-def knife_swipe(state):
+def clockwise_swipe(state):
     if state:
-        if not reverseScoop:
-            mm.on(-90)
-            play_random_quote()
-            reverseScoop = True
-        else:
-            mm.on(90)
-            play_random_quote()
-            reverseScoop = False
+        mm.on(10)
     else:
         mm.off()
 
-irs.on_channel1_top_left = straight_forward
-irs.on_channel1_top_right = turn_right
-irs.on_channel1_bottom_left = reverse
-irs.on_channel1_beacon = knife_swipe
-irs.on_channel1_bottom_right = turn_left
+def counter_clockwise_swipe(state):
+    if state:
+        mm.on(-10)
+    else:
+        mm.off()
+
+def resolve_action(state):
+    mt.off()
+    mm.off()
+    if states == [1,0,0,0]: # top left button
+        straight_forward(state)
+    elif states == [0,0,1,0]: # reverse
+        reverse(state)
+    elif states == [0,1,0,0]: # top right
+        turn_left(state)
+    elif states == [0,0,0,1]: # bottom right
+        turn_right(state)
+    elif states == [1,1,0,0]: # top left & top right
+        clockwise_swipe(state)
+    elif states == [0,0,1,1]: # bottom left & bottom right
+        counter_clockwise_swipe(state)
+
+irs.on_channel1_top_left = top_left_channel_1_action
+irs.on_channel1_top_right = top_right_channel_1_action
+irs.on_channel1_bottom_left = bottom_left_channel_1_action
+irs.on_channel1_bottom_right = bottom_right_channel_1_action
 
 def main():
     '''The main function of our program'''
@@ -118,10 +148,6 @@ def play_beep(hz=300.0, length=1.0):
     Sound().play_tone(hz, length)
 
 # XXXXXXXXXXXXXXXXXXX STATIC CONSTANTS ETC XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-# state constants
-ON = True
-OFF = False
 
 # supposedly, the battery runs out very quickly after 5 volts
 LOW_BATTERY_VOLTAGE_THRESHOLD = 5.0
